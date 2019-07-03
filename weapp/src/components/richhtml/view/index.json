@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "rich-image": "../image/index",
+    "rich-video": "../video/index",
+    "rich-link": "../link/index",
+    "rich-view": "./index"
+  }
+}
