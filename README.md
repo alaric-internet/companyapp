@@ -1,8 +1,13 @@
 # 企应用
 企应用是一款专门针对现在流行的小程序开发的小程序内容管理系统。支持微信小程序、百度智能小程序、支付宝小程序、字节跳动小程序、快应用等
 
-## 使用说明
-根目录下的.env是配置文件，目前需要手动配置。可以配置数据库信息、缓存信息等。
+# 目录
+
+1. [文件及目录说明](#文件和目录说明)
+2. [配置文件](#配置文件)
+3. [Web服务器配置](#Web服务器配置)
+    1. [Nginx](#Nginx)
+    2. [Apache](#Apache)
 
 ## 文件和目录说明
 ```text
@@ -80,4 +85,34 @@
     │   └── views
     └── logs
 
+```
+
+## 配置文件
+根目录下的.env是配置文件，目前需要手动配置。可以配置数据库信息、缓存信息等。
+
+## Web服务器配置
+
+### Nginx
+在你的站点配置加入下面内容
+```text
+...
+
+location / {
+    try_files $uri $uri/ /index.php?$query_string;
+}
+
+...
+```
+### Apache
+1. 打开Apache的`mod_rewrite`模块
+2. 在`public`目录下新建`.htaccess`文件
+3. 将以下内容写入到`.htaccess`文件中
+
+```text
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L]
 ```
