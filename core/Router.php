@@ -311,6 +311,19 @@ class Router
 		return $route;
     }
 
+    public function addGroup($namespace, $members)
+    {
+        foreach($members as $item)
+        {
+            $pattern = $item['pattern'];
+            $httpMethods = isset($item['method']) ? $item['method'] : null;
+            $position = isset($item['position']) ? $item['position'] : Router::POSITION_LAST;
+            $paths = $item['path'];
+            $paths['namespace'] = $namespace;
+            $this->add($pattern, $paths, $httpMethods, $position);
+        }
+    }
+
     public function addGet($pattern, $paths = null, $position = Router::POSITION_LAST)
 	{
 		return $this->add($pattern, $paths, "GET", $position);
